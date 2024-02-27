@@ -7,7 +7,7 @@ type Book = {
   date: number;
 };
 
-const BookApp = () => {
+const BookApp = () => { 
   const [command, setCommand] = useState<string>('');
   const [books, setBooks] = useState<Book[]>([]);
   const [title, setTitle] = useState<string>('');
@@ -15,16 +15,16 @@ const BookApp = () => {
   const [year, setYear] = useState<string>('');
   const [removeYear, setRemoveYear] = useState<string>('');
   const [filterYear, setFilterYear] = useState<string>('');
+  const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
 
 
   const addBook = () => {
-    const newBook: Book = { title, author, date: parseInt(year, 10) };
+    const newBook: Book = { title, author, date: parseInt(year)};
     setBooks(currentBooks => [...currentBooks, newBook]);
-    // Clear inputs after adding
     setTitle('');
     setAuthor('');
     setYear('');
-    setCommand(''); // Reset command to hide inputs
+    setCommand(''); 
   };
 
   const addBookInputs = () => (
@@ -40,8 +40,8 @@ const BookApp = () => {
   const removeBooks = () => {
     let filteredBooks = books.filter(book => book.date.toString() !== removeYear);
     setBooks(filteredBooks);
-    setRemoveYear(''); // Reset the removeYear input
-    setCommand(''); // Optionally reset command to hide inputs
+    setRemoveYear(''); 
+    setCommand(''); 
   };
   
   const removeBooksInput = () => (
@@ -62,11 +62,12 @@ const BookApp = () => {
 
     if (newSavedBook.length === 0) {
       Alert.alert(`No book is found for year ${filterYear}`);
+      setFilteredBooks([]);
     } else {
-      
+      setFilteredBooks(newSavedBook);
     }
     setFilterYear('');
-    setCommand(''); // Reset command to hide inputs
+    // setCommand(''); 
   };
 
   const searchBookInput = () => (
@@ -79,6 +80,21 @@ const BookApp = () => {
         keyboardType="numeric"
       />
       <Button title="Search Book/s" onPress={searchBook} />
+      {command === '1' && addBookInputs()}
+
+      <FlatList
+    data={filteredBooks.sort((a, b) => {
+      if (a.title.toLowerCase() === b.title.toLowerCase()) {
+        return b.date - a.date; 
+      }
+      return a.title.toLowerCase().localeCompare(b.title.toLowerCase()); 
+    })}
+    keyExtractor={(item, index) => item.title + index}
+    renderItem={({ item }) => (
+      <Text style={styles.bookItem}>{item.title} by {item.author} ({item.date})</Text>
+    )}
+    contentContainerStyle={{ flexGrow: 1}}
+  />
     </View>
   );
 
@@ -87,9 +103,9 @@ const BookApp = () => {
     <FlatList
     data={books.sort((a, b) => {
       if (a.title.toLowerCase() === b.title.toLowerCase()) {
-        return b.date - a.date; // Sort by year descending if titles are the same
+        return b.date - a.date; 
       }
-      return a.title.toLowerCase().localeCompare(b.title.toLowerCase()); // Otherwise sort by title ascending
+      return a.title.toLowerCase().localeCompare(b.title.toLowerCase()); 
     })}
     keyExtractor={(item, index) => item.title + index}
     renderItem={({ item }) => (
@@ -98,6 +114,7 @@ const BookApp = () => {
   />
   );
 
+
   return (
     <View style={styles.container}>
       <Text>Welcome to the Library!</Text>
@@ -105,7 +122,10 @@ const BookApp = () => {
         style={styles.input}
         placeholder="Enter command (1-add, 2-remove, 3-search, 4-display)"
         value={command}
-        onChangeText={setCommand}
+        onChangeText={ (test1 :string) => {
+          setCommand(test1);
+         }
+        }
       />
       {command === '1' && addBookInputs()}
       {command === '2' && removeBooksInput()}
