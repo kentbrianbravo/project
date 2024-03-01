@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { View, Text, TextInput, Button, FlatList, StyleSheet, Alert } from 'react-native';
 
 type Book = {
@@ -8,18 +8,17 @@ type Book = {
 };
 
 const BookApp = () => { 
-  const [command, setCommand] = useState<string>('');
+  const [command, setCommand] = useState('');
   const [books, setBooks] = useState<Book[]>([]);
-  const [title, setTitle] = useState<string>('');
-  const [author, setAuthor] = useState<string>('');
-  const [year, setYear] = useState<string>('');
-  const [removeYear, setRemoveYear] = useState<string>('');
-  const [filterYear, setFilterYear] = useState<string>('');
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [year, setYear] = useState('');
+  const [removeYear, setRemoveYear] = useState('');
+  const [filterYear, setFilterYear] = useState('');
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
 
-
   const addBook = () => {
-    const newBook: Book = { title, author, date: parseInt(year)};
+    const newBook: Book  = { title, author, date: parseInt(year)};
     setBooks(currentBooks => [...currentBooks, newBook]);
     setTitle('');
     setAuthor('');
@@ -36,6 +35,9 @@ const BookApp = () => {
     </View>
   );
 
+let a = 1;
+
+a = 2;
 
   const removeBooks = () => {
     let filteredBooks = books.filter(book => book.date.toString() !== removeYear);
@@ -91,9 +93,9 @@ const BookApp = () => {
     })}
     keyExtractor={(item, index) => item.title + index}
     renderItem={({ item }) => (
-      <Text style={styles.bookItem}>{item.title} by {item.author} ({item.date})</Text>
+      <Text style={styles.bookItem}>{item.title} {item.author} ({item.date})</Text>
     )}
-    contentContainerStyle={{ flexGrow: 1}}
+    // contentContainerStyle={{ flexGrow: 1}}
   />
     </View>
   );
@@ -109,7 +111,7 @@ const BookApp = () => {
     })}
     keyExtractor={(item, index) => item.title + index}
     renderItem={({ item }) => (
-      <Text style={styles.bookItem}>{item.title} by {item.author} ({item.date})</Text>
+      <Text style={styles.bookItem}>{item.title} {item.author} ({item.date})</Text>
     )}
   />
   );
@@ -122,10 +124,7 @@ const BookApp = () => {
         style={styles.input}
         placeholder="Enter command (1-add, 2-remove, 3-search, 4-display)"
         value={command}
-        onChangeText={ (test1 :string) => {
-          setCommand(test1);
-         }
-        }
+        onChangeText={setCommand}
       />
       {command === '1' && addBookInputs()}
       {command === '2' && removeBooksInput()}
@@ -134,6 +133,7 @@ const BookApp = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
