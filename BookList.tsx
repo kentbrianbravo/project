@@ -1,4 +1,6 @@
 import React from 'react';
+import {StackScreenProps} from '@react-navigation/stack';
+import {RootStackParamList} from './App';
 import {
   FlatList,
   Text,
@@ -14,7 +16,9 @@ type Book = {
   date: number;
 };
 
-const BookList = ({navigation}: {navigation: any}) => {
+type;
+
+const BookList = ({navigation}) => {
   // const books = [
   //   {title: 'Book 1', author: 'Author 1', date: 2000},
   //   {title: 'Book 2', author: 'Author 2', date: 2000},
@@ -29,7 +33,7 @@ const BookList = ({navigation}: {navigation: any}) => {
       <Button
         title="View Details"
         onPress={() =>
-          navigation.navigate('Book Details', {
+          navigation.navigate('BookDetails', {
             title: item.title,
             author: item.author,
             date: item.date,
@@ -40,7 +44,7 @@ const BookList = ({navigation}: {navigation: any}) => {
   );
 
   const searchDeleteBooks = () => {
-    navigation.navigate('Search and Delete Books');
+    navigation.navigate('BookSearchDelete');
   };
 
   const addBook = () => {

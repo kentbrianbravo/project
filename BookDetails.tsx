@@ -1,18 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
+import {RootStackParamList} from './App';
+import {View, Text, StyleSheet} from 'react-native';
 
-type BookDetailsProps = {
-  route: {
-    params: {
-      title: string;
-      author: string;
-      date: number;
-    };
-  };
-};
+// type BookDetailsProps = {
+//   route: {
+//     params: {
+//       title: string;
+//       author: string;
+//       date: number;
+//     };
+//   };
+// };
 
-const BookDetails : React.FC<BookDetailsProps> = ({ route }) => {
-  const { title, author, date } = route.params;
+type BookDetailsProps = StackScreenProps<RootStackParamList, 'BookDetails'>;
+
+const BookDetails = ({route}: BookDetailsProps) => {
+  const {title, author, date} = route.params;
 
   return (
     <View style={styles.container}>
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1
+    borderWidth: 1,
   },
   text: {
     fontSize: 20,
