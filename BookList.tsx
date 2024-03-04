@@ -16,9 +16,9 @@ type Book = {
   date: number;
 };
 
-type;
+type BookListProps = StackScreenProps<RootStackParamList, 'BookList'>;
 
-const BookList = ({navigation}) => {
+const BookList = ({navigation}: BookListProps) => {
   // const books = [
   //   {title: 'Book 1', author: 'Author 1', date: 2000},
   //   {title: 'Book 2', author: 'Author 2', date: 2000},
@@ -48,7 +48,7 @@ const BookList = ({navigation}) => {
   };
 
   const addBook = () => {
-    navigation.navigate('Add Books');
+    navigation.navigate('BookAdd');
   };
 
   return (
