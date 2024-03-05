@@ -5,11 +5,16 @@ import {createStackNavigator} from '@react-navigation/stack';
 // import BookApp from './BookApp';
 import BookList from './BookList';
 import BookSearchDelete from './BookSearchDelete';
-import BookAdd from './BookAdd';
+import BookAdd, { Book } from './BookAdd';
 import BookDetails from './BookDetails';
 
+
+
 export type RootStackParamList = {
-  BookList: undefined;
+  BookList: {
+    book?: Book ;
+    
+  };
   BookSearchDelete: undefined;
   BookAdd: undefined;
   BookDetails: {

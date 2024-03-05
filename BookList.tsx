@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from './App';
 import {
@@ -9,23 +9,30 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { Book } from './BookAdd';
 
-type Book = {
-  title: string;
-  author: string;
-  date: number;
-};
+
 
 type BookListProps = StackScreenProps<RootStackParamList, 'BookList'>;
 
-const BookList = ({navigation}: BookListProps) => {
+const BookList = ( {route,navigation}: BookListProps) => {
+  const [books, setBooks] = useState<Book[]>([]);
+
   // const books = [
   //   {title: 'Book 1', author: 'Author 1', date: 2000},
   //   {title: 'Book 2', author: 'Author 2', date: 2000},
   //   {title: 'Book 3', author: 'Author 3', date: 2001},
   // ];
 
-  const books: [] = [];
+
+  const param = route.params;
+  useEffect(() => {
+
+    const book = param?.book
+    if(book){
+      setBooks(currentBooks => [...currentBooks,book])
+    }
+  }, [param?.book] )
 
   const displayBookTitle = ({item}: {item: Book}) => (
     <View style={styles.bookItem}>

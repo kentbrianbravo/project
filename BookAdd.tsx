@@ -1,3 +1,4 @@
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import {useState} from 'react';
 // import {useNavigation} from '@react-navigation/native';
@@ -10,15 +11,18 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+import { RootStackParamList } from './App';
 
-type Book = {
+export type Book = {
   title: string;
   author: string;
   date: number;
 };
 
-const BookAdd = () => {
-  const [books, setBooks] = useState<Book[]>([]);
+type BookAddProps = StackScreenProps<RootStackParamList, 'BookAdd'>;
+
+const BookAdd = ({route, navigation}:BookAddProps ) => {
+  // const [books, setBooks] = useState<Book[]>([]);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [year, setYear] = useState('');
@@ -29,7 +33,11 @@ const BookAdd = () => {
       Alert.alert(`Please fill up all fields`);
     } else {
       const newBook: Book = {title, author, date: parseInt(year)};
-      setBooks(currentBooks => [...currentBooks, newBook]);
+      // setBooks(currentBooks => [...currentBooks, newBook]);
+      // books.push(newBook);
+      navigation.navigate('BookList', {
+        book : newBook
+      })
       Alert.alert(`successfully added book with Title: ${title}`);
       setTitle('');
       setAuthor('');
@@ -73,22 +81,28 @@ const BookAdd = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
+    marginHorizontal: 24,
+    marginVertical: 24,
+    // paddingHorizontal: 20,
+    // alignSelf: 'center',
   },
   input: {
-    height: 40,
-    width: 300,
-    margin: 12,
+    // flex: 1,
+    // height: ,
+    width: '100%',
+    // margin: 12,
     borderWidth: 1,
-    padding: 5,
-    textAlign: 'center',
+    marginBottom: 24,
+    marginTop: 8,
+    // padding: 5,
+    textAlign: 'left',
+    padding: 4,
+    paddingVertical: 8
   },
   text: {
     fontSize: 20,
     color: 'black',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   buttonContainer: {
     elevation: 10,
