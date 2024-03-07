@@ -1,5 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useState} from 'react';
 // import {useNavigation} from '@react-navigation/native';
 
@@ -21,11 +21,12 @@ export type Book = {
 
 type BookAddProps = StackScreenProps<RootStackParamList, 'BookAdd'>;
 
-const BookAdd = ({route, navigation}:BookAddProps ) => {
+const BookAdd = ({navigation}:BookAddProps ) => {
   // const [books, setBooks] = useState<Book[]>([]);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [year, setYear] = useState('');
+
   // const navigation = useNavigation();
 
   const addBook = () => {

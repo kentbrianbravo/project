@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from './App';
 import {
@@ -26,13 +26,15 @@ const BookList = ( {route,navigation}: BookListProps) => {
 
 
   const param = route.params;
+  
   useEffect(() => {
 
     const book = param?.book
     if(book){
       setBooks(currentBooks => [...currentBooks,book])
     }
-  }, [param?.book] )
+    console.log('called')
+  },[param?.book])
 
   const displayBookTitle = ({item}: {item: Book}) => (
     <View style={styles.bookItem}>
@@ -49,6 +51,18 @@ const BookList = ( {route,navigation}: BookListProps) => {
       />
     </View>
   );
+  const [number, setNumber] = useState(10)
+
+  const test = useCallback(() => {
+    const calc = number + 20;
+  },[]);
+
+  const test1 = useMemo(() => {
+    const calc = number + 20;
+  },[]);
+
+
+  
 
   const searchDeleteBooks = () => {
     navigation.navigate('BookSearchDelete');
