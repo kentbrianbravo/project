@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useContext } from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from './App';
 import {
@@ -10,13 +10,15 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Book } from './BookAdd';
+import { BookContext } from "./BookContext";
+
 
 
 
 type BookListProps = StackScreenProps<RootStackParamList, 'BookList'>;
 
 const BookList = ( {route,navigation}: BookListProps) => {
-  const [books, setBooks] = useState<Book[]>([]);
+  // const [books, setBooks] = useState<Book[]>([]);
 
   // const books = [
   //   {title: 'Book 1', author: 'Author 1', date: 2000},
@@ -24,17 +26,19 @@ const BookList = ( {route,navigation}: BookListProps) => {
   //   {title: 'Book 3', author: 'Author 3', date: 2001},
   // ];
 
+  const [books] = useContext(BookContext);
 
-  const param = route.params;
+
+
+  // const param = route.params;
   
-  useEffect(() => {
+  // useEffect(() => {
 
-    const book = param?.book
-    if(book){
-      setBooks(currentBooks => [...currentBooks,book])
-    }
-    console.log('called')
-  },[param?.book])
+  //   const book = param?.book
+  //   if(book){
+  //     setBooks(currentBooks => [...currentBooks,book])
+  //   }
+  // },[param?.book])
 
   const displayBookTitle = ({item}: {item: Book}) => (
     <View style={styles.bookItem}>
@@ -51,15 +55,15 @@ const BookList = ( {route,navigation}: BookListProps) => {
       />
     </View>
   );
-  const [number, setNumber] = useState(10)
+  // const [number, setNumber] = useState(10)
 
-  const test = useCallback(() => {
-    const calc = number + 20;
-  },[]);
+  // const test = useCallback(() => {
+  //   const calc = number + 20;
+  // },[]);
 
-  const test1 = useMemo(() => {
-    const calc = number + 20;
-  },[]);
+  // const test1 = useMemo(() => {
+  //   const calc = number + 20;
+  // },[]);
 
 
   
@@ -73,11 +77,18 @@ const BookList = ( {route,navigation}: BookListProps) => {
   };
 
   return (
+
     <View style={styles.container}>
       <FlatList
-        data={books}
+        data=
+        {books.sort((bookA, bookB) => {
+          if (bookA.title.toLowerCase() === bookB.title.toLowerCase()) {
+            return bookB.date - bookA.date; 
+          }
+          return bookA.title.toLowerCase().localeCompare(bookB.title.toLowerCase()); 
+        })}
         renderItem={displayBookTitle}
-        keyExtractor={item => item.title}
+        keyExtractor={(item, index) => index.toString()}
       />
 
       {/* <Button
@@ -104,6 +115,9 @@ const BookList = ( {route,navigation}: BookListProps) => {
   );
 };
 
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -122,7 +136,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonContainer: {
-    elevation: 10,
+    // elevation: 10,
     backgroundColor: '#515151',
     borderRadius: 5,
     paddingVertical: 10,

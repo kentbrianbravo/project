@@ -1,7 +1,8 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useEffect } from 'react';
-import {useState} from 'react';
-// import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {useState, useContext} from 'react';
+import { BookContext } from "./BookContext";
+
 
 import {
   TextInput,
@@ -23,6 +24,10 @@ type BookAddProps = StackScreenProps<RootStackParamList, 'BookAdd'>;
 
 const BookAdd = ({navigation}:BookAddProps ) => {
   // const [books, setBooks] = useState<Book[]>([]);
+
+  const [books, setBooks] = useContext(BookContext);
+
+
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [year, setYear] = useState('');
@@ -35,10 +40,16 @@ const BookAdd = ({navigation}:BookAddProps ) => {
     } else {
       const newBook: Book = {title, author, date: parseInt(year)};
       // setBooks(currentBooks => [...currentBooks, newBook]);
+      setBooks(books => [...books, newBook]);
+      // Alert.alert(`successfully added book with Title: ${title}`);
+
+      // setBookCompilation(books);
       // books.push(newBook);
-      navigation.navigate('BookList', {
-        book : newBook
-      })
+
+      // navigation.navigate('BookList', {
+      //   book : newBook
+      // })
+
       Alert.alert(`successfully added book with Title: ${title}`);
       setTitle('');
       setAuthor('');
