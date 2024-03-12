@@ -5,17 +5,25 @@ import {createStackNavigator} from '@react-navigation/stack';
 // import BookApp from './BookApp';
 import BookList from './BookList';
 import BookSearchDelete from './BookSearchDelete';
-import BookAdd from './BookAdd';
+import BookAdd, { Book } from './BookAdd';
 import BookDetails from './BookDetails';
+import { BookProvider } from './BookContext';
+
+
 
 export type RootStackParamList = {
   BookList: undefined;
+  // {
+  //   book?: Book ;
+  // };
+
   BookSearchDelete: undefined;
   BookAdd: undefined;
-  BookDetails: {
-    title: string;
-    author: string;
-    date: number;
+  BookDetails: 
+  {
+    title?: string;
+    author?: string;
+    date?: number;
   };
 };
 
@@ -23,6 +31,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
+    <BookProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="BookList">
         <Stack.Screen name="BookList" component={BookList} />
@@ -31,6 +40,7 @@ const App = () => {
         <Stack.Screen name="BookDetails" component={BookDetails} />
       </Stack.Navigator>
     </NavigationContainer>
+    </BookProvider>
   );
 };
 
