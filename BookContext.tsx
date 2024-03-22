@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Book } from './BookAdd';
 
 interface BookProviderProps {
@@ -6,7 +6,7 @@ interface BookProviderProps {
 }
 const BookContext = createContext<[Book[], React.Dispatch<React.SetStateAction<Book[]>>]>([[], () => {}]);
 
-const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
+const BookProvider = ({ children }: BookProviderProps) => {
   const [books, setBooks] = useState<Book[]>([]);
 
   return (
