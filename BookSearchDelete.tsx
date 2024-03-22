@@ -45,7 +45,7 @@ const BookSearchDelete = ({route, navigation} : BookSearchDeleteProps) => {
   }, [books]);
 
 
-  const displayBookTitle = ({item}: {item: Book}) => (
+  const displayBookTitle = ({item,index}: {item: Book, index: number}) => (
     <View style={styles.bookItem}>
       <Text style={styles.bookTitle}>{item.title}</Text>
       <Button
@@ -60,8 +60,7 @@ const BookSearchDelete = ({route, navigation} : BookSearchDeleteProps) => {
       />
       <Button
         title="Remove"
-        onPress={() => {removeBook(item.date)
-        }}
+        onPress={() => {removeBook(index)}}
       />
     </View>
   );
@@ -74,9 +73,14 @@ const BookSearchDelete = ({route, navigation} : BookSearchDeleteProps) => {
     setFilteredBooks(newFilteredBooks);
   };
 
-  const removeBook = (date: number) => {
-    setBooks(books => books.filter(book => book.date !== date));
+  const removeBook = (index: number) => {
+    // setBooks(books => books.filter(book => book.date !== date));
     // Alert.alert('Pressed');
+    setBooks(prevBooks => {
+      const updatedBooks = [...prevBooks];
+      updatedBooks.splice(index, 1);
+      return updatedBooks;
+    });
   };
 
   return (
@@ -93,7 +97,7 @@ const BookSearchDelete = ({route, navigation} : BookSearchDeleteProps) => {
           return bookA.title.toLowerCase().localeCompare(bookB.title.toLowerCase()); 
         })}
         renderItem={displayBookTitle}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item,index) => index.toString()}
       />
       <TouchableOpacity
         // onPress={Search function}
