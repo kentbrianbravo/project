@@ -25,17 +25,6 @@ const BookSearchDelete = ({route, navigation} : BookSearchDeleteProps) => {
   const [filteredBooks, setFilteredBooks] = useState(books);
   const [searchBooks, setSearchBooks] = useState('');
 
-
-  // const books = [
-  //   {title: 'Book 1', author: 'Author 1', date: 2000},
-  //   {title: 'Book 2', author: 'Author 2', date: 2000},
-  //   {title: 'Book 3', author: 'Author 3', date: 2001},
-  // ];
-
-  // useEffect(() => {
-    
-  // },[books]);
-
   useEffect(() => {
     setFilteredBooks(
       books.filter(book =>
@@ -74,8 +63,6 @@ const BookSearchDelete = ({route, navigation} : BookSearchDeleteProps) => {
   };
 
   const removeBook = (index: number) => {
-    // setBooks(books => books.filter(book => book.date !== date));
-    // Alert.alert('Pressed');
     setBooks(prevBooks => {
       const updatedBooks = [...prevBooks];
       updatedBooks.splice(index, 1);
@@ -100,7 +87,6 @@ const BookSearchDelete = ({route, navigation} : BookSearchDeleteProps) => {
         keyExtractor={(item,index) => index.toString()}
       />
       <TouchableOpacity
-        // onPress={Search function}
         onPress={displayFilteredBooks}
         style={styles.buttonContainer}>        
         <Text style={styles.buttonText}>Search</Text>
@@ -115,19 +101,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 24,
     marginVertical: 24,
-    // marginTop: 20,
-    // paddingHorizontal: 20,
-    // alignSelf: 'center',
   },
   input: {
-    // flex: 1,
-    // height: ,
     width: '100%',
-    // margin: 12,
     borderWidth: 1,
     marginBottom: 24,
     marginTop: 8,
-    // padding: 5,
     textAlign: 'left',
     padding: 4,
     paddingVertical: 8
@@ -137,18 +116,6 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'left',
   },
-  // buttonContainer: {
-  //   backgroundColor: '#515151',
-  //   borderRadius: 5,
-  //   paddingVertical: 10,
-  //   paddingHorizontal: 10,
-  //   margin: 10,
-  //   // marginTop: '100%',
-  //   // marginHorizontal: 20,
-  //   // position: 'absolute',
-  //   top: '70%',
-  //   alignContent: 'center'
-  // },
   buttonContainer: {
     backgroundColor: '#515151',
     borderRadius: 5,

@@ -18,27 +18,8 @@ import { BookContext } from "./BookContext";
 type BookListProps = StackScreenProps<RootStackParamList, 'BookList'>;
 
 const BookList = ( {route,navigation}: BookListProps) => {
-  // const [books, setBooks] = useState<Book[]>([]);
-
-  // const books = [
-  //   {title: 'Book 1', author: 'Author 1', date: 2000},
-  //   {title: 'Book 2', author: 'Author 2', date: 2000},
-  //   {title: 'Book 3', author: 'Author 3', date: 2001},
-  // ];
 
   const [books] = useContext(BookContext);
-
-
-
-  // const param = route.params;
-  
-  // useEffect(() => {
-
-  //   const book = param?.book
-  //   if(book){
-  //     setBooks(currentBooks => [...currentBooks,book])
-  //   }
-  // },[param?.book])
 
   const displayBookTitle = ({item}: {item: Book}) => (
     <View style={styles.bookItem}>
@@ -55,18 +36,6 @@ const BookList = ( {route,navigation}: BookListProps) => {
       />
     </View>
   );
-  // const [number, setNumber] = useState(10)
-
-  // const test = useCallback(() => {
-  //   const calc = number + 20;
-  // },[]);
-
-  // const test1 = useMemo(() => {
-  //   const calc = number + 20;
-  // },[]);
-
-
-  
 
   const searchDeleteBooks = () => {
     navigation.navigate('BookSearchDelete');
@@ -91,20 +60,11 @@ const BookList = ( {route,navigation}: BookListProps) => {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      {/* <Button
-      title="Search & Delete Books"
-      onPress={() => searchDeleteBooks()}
-      /> */}
-
       <TouchableOpacity
         onPress={() => searchDeleteBooks()}
         style={styles.buttonContainer}>
         <Text style={styles.buttonText}>Search & Delete Books</Text>
       </TouchableOpacity>
-
-      {/* <Button 
-      title="Add Book" onPress={() => addBook()} 
-      /> */}
 
       <TouchableOpacity
         onPress={() => addBook()}

@@ -3,16 +3,6 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from './App';
 import {View, Text, StyleSheet} from 'react-native';
 
-// type BookDetailsProps = {
-//   route: {
-//     params: {
-//       title: string;
-//       author: string;
-//       date: number;
-//     };
-//   };
-// };
-
 type BookDetailsProps = StackScreenProps<RootStackParamList, 'BookDetails'>;
 
 const BookDetails = ({route}: BookDetailsProps) => {

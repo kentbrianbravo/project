@@ -1,8 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-// import type {NativeStackScreenProps} from '@react-navigation/stack';
-// import BookApp from './BookApp';
 import BookList from './BookList';
 import BookSearchDelete from './BookSearchDelete';
 import BookAdd, { Book } from './BookAdd';
@@ -13,10 +11,6 @@ import { BookProvider } from './BookContext';
 
 export type RootStackParamList = {
   BookList: undefined;
-  // {
-  //   book?: Book ;
-  // };
-
   BookSearchDelete: undefined;
   BookAdd: undefined;
   BookDetails: 

@@ -23,32 +23,19 @@ export type Book = {
 type BookAddProps = StackScreenProps<RootStackParamList, 'BookAdd'>;
 
 const BookAdd = ({navigation}:BookAddProps ) => {
-  // const [books, setBooks] = useState<Book[]>([]);
 
   const [books, setBooks] = useContext(BookContext);
-
 
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [year, setYear] = useState('');
-
-  // const navigation = useNavigation();
 
   const addBook = () => {
     if (title === '' || author === '' || year === '') {
       Alert.alert(`Please fill up all fields`);
     } else {
       const newBook: Book = {title, author, date: parseInt(year)};
-      // setBooks(currentBooks => [...currentBooks, newBook]);
       setBooks(books => [...books, newBook]);
-      // Alert.alert(`successfully added book with Title: ${title}`);
-
-      // setBookCompilation(books);
-      // books.push(newBook);
-
-      // navigation.navigate('BookList', {
-      //   book : newBook
-      // })
 
       Alert.alert(`successfully added book with Title: ${title}`);
       setTitle('');
@@ -95,18 +82,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 24,
     marginVertical: 24,
-    // paddingHorizontal: 20,
-    // alignSelf: 'center',
   },
   input: {
-    // flex: 1,
-    // height: ,
     width: '100%',
-    // margin: 12,
     borderWidth: 1,
     marginBottom: 24,
     marginTop: 8,
-    // padding: 5,
     textAlign: 'left',
     padding: 4,
     paddingVertical: 8

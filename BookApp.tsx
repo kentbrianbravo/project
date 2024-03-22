@@ -95,7 +95,6 @@ a = 2;
     renderItem={({ item }) => (
       <Text style={styles.bookItem}>{item.title} {item.author} ({item.date})</Text>
     )}
-    // contentContainerStyle={{ flexGrow: 1}}
   />
     </View>
   );
